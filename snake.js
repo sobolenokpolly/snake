@@ -64,7 +64,15 @@ class Snake {
     checkDeadCollision() {
         const isXBeyondBorders = this.body[0].x === -1 || this.body[0].x === FIELD_SIZE.w 
         const isYBeyondBorders = this.body[0].y === -1 || this.body[0].y === FIELD_SIZE.h
-        return isXBeyondBorders || isYBeyondBorders 
+
+        let isHitSelf = false
+        for( let i = 1; i < this.body.length; i++) {
+            const el = this.body[i]
+            if (el.x === this.body[0].x && el.y === this.body[0].y) {
+                isHitSelf = true
+            }
+        }
+        return isXBeyondBorders || isYBeyondBorders || isHitSelf
     } 
     checkEatCollision(foodStorage) {
         for ( let i of foodStorage) {
